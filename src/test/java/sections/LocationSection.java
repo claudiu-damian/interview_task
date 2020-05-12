@@ -1,0 +1,50 @@
+package sections;
+
+import com.thoughtworks.gauge.Step;
+import functional.core.TestContext;
+import hooks.BasePage;
+import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+
+import static constants.TestConstants.INITIAL_LOCATION_LIST;
+import static functional.constants.ConfigurationConstants.URL;
+
+/**
+ * @author: Claudiu-Damian Panzaru
+ * @date: 5/11/2020
+ * @description: Selector declarations and actions with elements from the Location Section of the page
+ */
+
+@Getter
+public class LocationSection extends BasePage {
+    private By locationsSelector = By.cssSelector(".sc-cSHVUG.dvIJqh");
+    private By searchBox = By.cssSelector("#searchBox");
+    private By firstFoundLocation = By.cssSelector(".pac-item:first-of-type");
+    private By milesAway = By.cssSelector(".sc-chPdSV.GZFXv");
+
+    @Step("Open Location Page")
+    public void openLocationPage() {
+        navigateTo(System.getenv(URL));
+        waitForPage();
+        switchFrame(0);
+    }
+
+    @Step("Search for a location from the delivery area")
+    public void getAllLocations() {
+        List<WebElement> firstList = getLocationListElements();
+        type(firstList.get(0).getText(), searchBox);
+        TestContext.getScenarioStore().put(INITIAL_LOCATION_LIST, firstList);
+        clickOnFirstFoundLocation();
+    }
+
+    List<WebElement> getLocationListElements() {
+        return getElements(locationsSelector);
+    }
+
+    private void clickOnFirstFoundLocation() {
+        click(firstFoundLocation);
+    }
+}
