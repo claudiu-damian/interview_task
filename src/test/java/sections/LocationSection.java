@@ -33,10 +33,19 @@ public class LocationSection extends BasePage {
     }
 
     @Step("Search for a location from the delivery area")
-    public void getAllLocations() {
-        List<WebElement> firstList = getLocationListElements();
-        type(firstList.get(0).getText(), searchBox);
-        TestContext.getScenarioStore().put(INITIAL_LOCATION_LIST, firstList);
+    public void searchForLocationInDeliveryArea() {
+        type(getLocationListElements().get(0).getText(), searchBox);
+        clickOnFirstFoundLocation();
+    }
+
+    @Step("Save the initial location list")
+    public void saveTheInitialLocationList() {
+        TestContext.getScenarioStore().put(INITIAL_LOCATION_LIST, getLocationListElements());
+    }
+
+    @Step("Search for a location outside the delivery area")
+    public void searchForLocationNotInDeliveryArea() {
+        type("Chisinau", searchBox);
         clickOnFirstFoundLocation();
     }
 

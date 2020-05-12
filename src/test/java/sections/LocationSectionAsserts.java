@@ -20,8 +20,17 @@ public class LocationSectionAsserts extends LocationSection {
     public void wasListUpdatedWithCloseLocations() {
         waitForElementToBeVisible(getMilesAway());
         waitForPage();
-        AssertHelper.assertTrue("Lists have same sizes, the search was not done properly",
+        AssertHelper.assertTrue("Location lists have same sizes, the search was not done properly",
                 !(((List<WebElement>) TestContext.getScenarioStore().get(INITIAL_LOCATION_LIST)).size()
                         == getLocationListElements().size()));
+    }
+
+    @Step("Verify if all the locations are displayed in the list")
+    public void wasNotListUpdatedWithCloseLocations() {
+        waitForElementToBeVisible(getMilesAway());
+        waitForPage();
+        AssertHelper.assertTrue("Location lists have not same sizes, the search was not done properly",
+                ((List<WebElement>) TestContext.getScenarioStore().get(INITIAL_LOCATION_LIST)).size()
+                        == getLocationListElements().size());
     }
 }
