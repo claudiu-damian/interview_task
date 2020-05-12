@@ -18,6 +18,7 @@ Created by cpanzaru on 5/11/2020
 * Verify if all the locations are displayed in the list
 
 ## If location is unclear an warning appears
+Tags: negative
 * Open Location Page
 * Search for an unclear location
 * Warning: "Please be more specific" appears
