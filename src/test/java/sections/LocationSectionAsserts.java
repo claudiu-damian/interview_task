@@ -1,13 +1,8 @@
 package sections;
 
 import com.thoughtworks.gauge.Step;
-import functional.core.TestContext;
 import functional.helpers.AssertHelper;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
-import static constants.TestConstants.INITIAL_LOCATION_LIST;
+import org.openqa.selenium.By;
 
 /**
  * @author: Claudiu-Damian Panzaru
@@ -21,16 +16,26 @@ public class LocationSectionAsserts extends LocationSection {
         waitForElementToBeVisible(getMilesAway());
         waitForPage();
         AssertHelper.assertTrue("Location lists have same sizes, the search was not done properly",
-                !(((List<WebElement>) TestContext.getScenarioStore().get(INITIAL_LOCATION_LIST)).size()
-                        == getLocationListElements().size()));
+                !((returnInitialLocationList()).size() == getLocationListElements().size()));
     }
 
-    @Step("Verify if all the locations are displayed in the list")
+    @Step("Verify if all the locations are displayed in the list with miles")
     public void wasNotListUpdatedWithCloseLocations() {
         waitForElementToBeVisible(getMilesAway());
         waitForPage();
         AssertHelper.assertTrue("Location lists have not same sizes, the search was not done properly",
-                ((List<WebElement>) TestContext.getScenarioStore().get(INITIAL_LOCATION_LIST)).size()
-                        == getLocationListElements().size());
+                returnInitialLocationList().size() == getLocationListElements().size());
+    }
+
+    @Step("Verify if all the locations are displayed in the list")
+    public void areAllTheLocationsDisplayed() {
+        waitForPage();
+        AssertHelper.assertTrue("Location lists have not same sizes, the search was not done properly",
+                returnInitialLocationList().size() == getLocationListElements().size());
+    }
+
+    @Step("Warning: <message> appears")
+    public void isWarningDisplayed(String message) {
+        AssertHelper.assertTrue("", isElementPresent(By.xpath("//*[text()='" + message + "']")));
     }
 }

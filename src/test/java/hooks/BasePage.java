@@ -50,4 +50,8 @@ public class BasePage {
     public void waitForPage() {
         actionHelper.waitForPage();
     }
+
+    public boolean isElementPresent(By by) {
+        return actionHelper.isElementPresent(by);
+    }
 }

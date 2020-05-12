@@ -8,4 +8,7 @@ package constants;
 
 public class TestConstants {
     public static final String INITIAL_LOCATION_LIST = "initial list";
+
+    public static final String OUTSIDE_ADDRESS = "Chisinau";
+    public static final String RANDOM_TEXT = "some random text";
 }

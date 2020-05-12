@@ -91,4 +91,13 @@ public class ActionHelper {
             previous = current;
         }
     }
+
+    public boolean isElementPresent(By by) {
+        if (getElements(by).size() > 0) {
+            log.info("Element is present: [" + by.toString() + "]");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

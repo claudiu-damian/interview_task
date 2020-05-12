@@ -18,7 +18,8 @@ public class DriverFactory {
     public static WebDriver createDriver() {
         WebDriver driver = getChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(Integer.parseInt(System.getenv(IMPLICITLY_WAIT_TIMEOUT)),
+                TimeUnit.MILLISECONDS);
         driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(System.getenv(PAGE_LOAD_TIMEOUT)), TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
         return driver;
